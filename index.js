@@ -1,10 +1,7 @@
 import express, { json, urlencoded } from "express";
-import dotenv from "dotenv";
-import cors from 'cors'
+import cors from "cors";
 import storeRouter from "./routers/store.js";
 import authRouter from "./routers/auth.js";
-
-if ('production' !== "production") dotenv.config();
 
 const app = express();
 const port = 5000;
@@ -19,6 +16,5 @@ app.listen(port, (error) => {
   if (error) throw error;
   console.log("Server running on port " + port);
 });
-
 
 module.exports = app;
