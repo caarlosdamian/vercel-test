@@ -1,14 +1,24 @@
-const express = require("express");
+import express, { json, urlencoded } from "express";
+import dotenv from "dotenv";
+import cors from 'cors'
+import storeRouter from "./routers/store.js";
+import authRouter from "./routers/auth.js";
+
+if ('production' !== "production") dotenv.config();
 
 const app = express();
+const port = 5000;
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
-app.get("/hello", (req, res) => {
-  res.send("Express on Vercel");
+app.use("/api/store", storeRouter);
+app.use("/api/auth", authRouter);
+
+app.listen(port, (error) => {
+  if (error) throw error;
+  console.log("Server running on port " + port);
 });
 
-app.listen(5000, () => {
-  console.log("Running on port 5000.");
-});
 
-// Export the Express API
 module.exports = app;
