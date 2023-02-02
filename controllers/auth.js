@@ -1,7 +1,6 @@
 const { errorResponse, successResponse } = require("../utility/utils.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const {
   isEmailRegistered,
   insertUser,
@@ -9,8 +8,8 @@ const {
   getUserById,
 } = require("../sqlite/db.js");
 
-const secret = config.get("Auth.secret");
-const tokeExp = config.get("Auth.tokenExp");
+const secret = 'supersecret';
+const tokeExp = '259200';
 
 const registerUser = async (req, res) => {
   const { displayName, email } = req.body;

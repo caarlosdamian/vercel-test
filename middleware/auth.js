@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 const { errorResponse } = require("../utility/utils.js");
 
  function auth(req, res, next) {
@@ -7,7 +6,7 @@ const { errorResponse } = require("../utility/utils.js");
   if (!token)
     return errorResponse(res, "No access token, authorization denied!", 401);
   try {
-    const secret = config.get("Auth.secret");
+    const secret = 'supersecret';
     const decoded = jwt.verify(token, secret);
     req.user = decoded.user;
     next();

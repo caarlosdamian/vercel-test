@@ -1,5 +1,4 @@
 const sqlite3 = require("sqlite3");
-const config = require("config");
 const {
   ADD_USER,
   COLLECTIONS,
@@ -9,7 +8,7 @@ const {
   USER_BY_ID,
 } = require("./queries.js");
 
-const dbPath = config.get("DB.path");
+const dbPath = './sqlite/crown_store.db';
 
  const getCollections = () => {
   const data = [];
