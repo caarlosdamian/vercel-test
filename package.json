@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": " NODE_ENV='production' && nodemon index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
