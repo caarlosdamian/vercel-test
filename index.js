@@ -1,12 +1,14 @@
-
-const authRouter = require('./routers/auth.js')
-const storeRouter = require('./routers/store.js')
-const cors = require('cors');
-const express = require('express');
+const authRouter = require("./routers/auth.js");
+const storeRouter = require("./routers/store.js");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const express = require("express");
 const { json, urlencoded } = express;
 
+if (process.env.NODE_ENV !== "production") dotenv.config();
+
 const app = express();
-const port = 5002;
+const port = process.env.PORT || 5002;
 app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));

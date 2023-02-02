@@ -5,7 +5,6 @@ const { validateErrors } = require("../middleware/validation.js");
 const { auth } = require("../middleware/auth.js");
 
 const router = express.Router();
-console.log('========getUser=====',getUser);
 router
   .route("/")
   .get(auth, getUser)
