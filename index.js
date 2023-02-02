@@ -4,7 +4,7 @@ import storeRouter from "./routers/store.js";
 import authRouter from "./routers/auth.js";
 
 const app = express();
-const port = 5000;
+const port = 5002;
 app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
