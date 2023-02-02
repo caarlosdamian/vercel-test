@@ -1,13 +1,18 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import config from "config";
-import { isEmailRegistered, insertUser, getUserByEmail, getUserById } from "../sqlite/db.js";
-import { errorResponse, successResponse } from "../utility/utils.js";
+const { errorResponse, successResponse } = require("../utility/utils.js");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const {
+  isEmailRegistered,
+  insertUser,
+  getUserByEmail,
+  getUserById,
+} = require("../sqlite/db.js");
 
 const secret = config.get("Auth.secret");
 const tokeExp = config.get("Auth.tokenExp");
 
-export const registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   const { displayName, email } = req.body;
   try {
     const isRegistered = await isEmailRegistered(email);
@@ -39,8 +44,7 @@ export const registerUser = async (req, res) => {
     return errorResponse(res, error);
   }
 };
-
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email);
@@ -72,7 +76,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const user = await getUserById(req.user.id);
     const { displayName, email } = user;
@@ -83,4 +87,10 @@ export const getUser = async (req, res) => {
   } catch (error) {
     return errorResponse(res, error);
   }
+};
+
+module.exports = {
+  getUser,
+  loginUser,
+  registerUser,
 };

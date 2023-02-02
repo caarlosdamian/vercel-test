@@ -1,7 +1,9 @@
-import express, { json, urlencoded } from "express";
-import cors from "cors";
-import storeRouter from "./routers/store.js";
-import authRouter from "./routers/auth.js";
+
+const authRouter = require('./routers/auth.js')
+const storeRouter = require('./routers/store.js')
+const cors = require('cors');
+const express = require('express');
+const { json, urlencoded } = express;
 
 const app = express();
 const port = 5002;

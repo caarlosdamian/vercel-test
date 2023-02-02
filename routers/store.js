@@ -1,10 +1,10 @@
-// module imports
-import express from "express";
+const express = require("express");
 
-import { retrieveCollections } from "../controllers/store.js";
+const { retrieveCollections } = require("../controllers/store.js");
 
 const router = express.Router();
 
 router.route("/collections").get(retrieveCollections);
 
-export default router;
+
+module.exports = router;

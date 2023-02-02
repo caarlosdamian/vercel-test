@@ -1,10 +1,17 @@
-import sqlite3 from "sqlite3";
-import config from "config";
-import { ADD_USER, COLLECTIONS, IS_MAIL_REGISTERED, LAST_ID, USER_BY_EMAIL, USER_BY_ID } from "./queries.js";
+const sqlite3 = require("sqlite3");
+const config = require("config");
+const {
+  ADD_USER,
+  COLLECTIONS,
+  IS_MAIL_REGISTERED,
+  LAST_ID,
+  USER_BY_EMAIL,
+  USER_BY_ID,
+} = require("./queries.js");
 
 const dbPath = config.get("DB.path");
 
-export const getCollections = () => {
+ const getCollections = () => {
   const data = [];
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(dbPath);
@@ -13,7 +20,8 @@ export const getCollections = () => {
         reject(err);
       } else {
         rows.forEach((row) => {
-          const { col_id, title, routeName, item_id, name, price, imageUrl } = row;
+          const { col_id, title, routeName, item_id, name, price, imageUrl } =
+            row;
           data.push({
             col_id,
             title,
@@ -31,7 +39,7 @@ export const getCollections = () => {
   });
 };
 
-export const isEmailRegistered = (email) => {
+ const isEmailRegistered = (email) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(dbPath);
     db.get(IS_MAIL_REGISTERED, [email], (err, row) => {
@@ -46,7 +54,7 @@ export const isEmailRegistered = (email) => {
   });
 };
 
-export const getUserByEmail = (email) => {
+ const getUserByEmail = (email) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(dbPath);
     db.get(USER_BY_EMAIL, [email], (err, row) => {
@@ -60,7 +68,7 @@ export const getUserByEmail = (email) => {
   });
 };
 
-export const getUserById = (id) => {
+ const getUserById = (id) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(dbPath);
     db.get(USER_BY_ID, [id], (err, row) => {
@@ -74,7 +82,7 @@ export const getUserById = (id) => {
   });
 };
 
-export const insertUser = (displayName, email, password) => {
+ const insertUser = (displayName, email, password) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(dbPath);
     db.run(ADD_USER, [displayName, email, password], (err) => {
@@ -90,3 +98,12 @@ export const insertUser = (displayName, email, password) => {
     db.close();
   });
 };
+
+
+module.exports ={
+  getCollections,
+  isEmailRegistered,
+  getUserByEmail,
+  getUserById,
+  insertUser,
+}

@@ -1,7 +1,7 @@
-import { getCollections } from "../sqlite/db.js";
-import { errorResponse, successResponse } from "../utility/utils.js";
+const { getCollections } = require("../sqlite/db.js");
+const { errorResponse, successResponse } = require("../utility/utils.js");
 
-export const retrieveCollections = async (req, res) => {
+ const retrieveCollections = async (req, res) => {
   try {
     const data = await getCollections();
     return successResponse(res, data);
@@ -9,3 +9,5 @@ export const retrieveCollections = async (req, res) => {
     return errorResponse(error);
   }
 };
+
+module.exports = { retrieveCollections };

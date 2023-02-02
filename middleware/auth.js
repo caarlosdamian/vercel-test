@@ -1,10 +1,11 @@
-import jwt from "jsonwebtoken";
-import config from "config";
-import { errorResponse } from "../utility/utils.js";
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { errorResponse } = require("../utility/utils.js");
 
-export function auth(req, res, next) {
+ function auth(req, res, next) {
   const token = req.header("x-auth-token");
-  if (!token) return errorResponse(res, "No access token, authorization denied!", 401);
+  if (!token)
+    return errorResponse(res, "No access token, authorization denied!", 401);
   try {
     const secret = config.get("Auth.secret");
     const decoded = jwt.verify(token, secret);
@@ -14,3 +15,5 @@ export function auth(req, res, next) {
     return errorResponse(res, "Invalid token!", 401);
   }
 }
+
+module.exports = {auth};

@@ -1,7 +1,7 @@
-import { validationResult } from "express-validator";
-import { errorResponse } from "../utility/utils.js";
+const { validationResult } = require("express-validator");
+const { errorResponse } = require("../utility/utils.js");
 
-export function validateErrors(req, res, next) {
+ function validateErrors(req, res, next) {
   const validationErrors = validationResult(req);
   console.log(validationErrors);
 
@@ -9,4 +9,9 @@ export function validateErrors(req, res, next) {
     return errorResponse(res, validationErrors.errors);
   }
   next();
+}
+
+
+module.exports = {
+  validateErrors
 }
